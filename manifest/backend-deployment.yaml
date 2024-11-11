@@ -1,0 +1,23 @@
+apiVersion: apps/v1  
+kind: Deployment  
+metadata: 
+  name: backend-deployment  # Deployment object name
+
+spec:  # Deployment object specification
+  replicas: 1 
+  
+  selector:  # Selector to match labels for pods controlled by this Deployment
+    matchLabels:
+      component: back  # Selector to match pods with the label "component: back"
+
+  template:  # Template for creating pods
+    metadata:
+      labels:  # Labels applied to pods created by this Deployment
+        component: back 
+
+    spec:  # Specifications for the pod
+      containers:  
+        - name: flask-backend-app  # Name of the container  
+          image: bossmanjerry/flask-backend-app:v1
+          ports:  
+            - containerPort: 5000  # Port 5000 exposed on the container
