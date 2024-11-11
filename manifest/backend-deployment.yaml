@@ -1,23 +1,39 @@
 apiVersion: apps/v1  
 kind: Deployment  
 metadata: 
-  name: backend-deployment  # Deployment object name
+  name: backend-deployment
 
-spec:  # Deployment object specification
+spec:  
   replicas: 1 
-  
-  selector:  # Selector to match labels for pods controlled by this Deployment
+  selector:  
     matchLabels:
-      component: back  # Selector to match pods with the label "component: back"
+      component: back
 
-  template:  # Template for creating pods
+  template:  
     metadata:
-      labels:  # Labels applied to pods created by this Deployment
+      labels:  
         component: back 
 
-    spec:  # Specifications for the pod
+    spec:  
       containers:  
-        - name: flask-backend-app  # Name of the container  
-          image: bossmanjerry/flask-backend-app:v1
+        - name: flask-backend-app  
+          image: boseshim/flask-backend-app:v1
           ports:  
-            - containerPort: 5000  # Port 5000 exposed on the container
+            - containerPort: 5000
+
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-sec
+                  key: MONGO_URI
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-sec
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-sec
+                  key: password
