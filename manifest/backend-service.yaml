@@ -7,6 +7,6 @@ spec:
   ports:
     - port: 5000            # Port exposed externally by the Service
       targetPort: 5000     # Port on the pods to forward traffic to
-      nodePort: 31516     # Port on each node to expose the Service 
+      protocol: TCP     # Port on each node to expose the Service 
   selector:
     component: back       # Select pods with the label "component: back" to target
