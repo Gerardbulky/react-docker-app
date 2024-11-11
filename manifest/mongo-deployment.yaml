@@ -27,12 +27,17 @@ spec:
         ports:
         - containerPort: 27017
         env:
-          - name: MONGO_INITDB_ROOT_USERNAME
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: mongo-sec
+                key: MONGO_URI
+          - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
                 name: mongo-sec
                 key: username
-          - name: MONGO_INITDB_ROOT_PASSWORD
+          - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mongo-sec
@@ -48,6 +53,7 @@ spec:
       resources:
         requests:
           storage: 1Gi
+
 
 # apiVersion: apps/v1
 # kind: StatefulSet
@@ -78,17 +84,12 @@ spec:
 #         ports:
 #         - containerPort: 27017
 #         env:
-#           - name: MONGO_URI
-#             valueFrom:
-#               secretKeyRef:
-#                 name: mongo-sec
-#                 key: MONGO_URI
-#           - name: DB_USERNAME
+#           - name: MONGO_INITDB_ROOT_USERNAME
 #             valueFrom:
 #               secretKeyRef:
 #                 name: mongo-sec
 #                 key: username
-#           - name: DB_PASSWORD
+#           - name: MONGO_INITDB_ROOT_PASSWORD
 #             valueFrom:
 #               secretKeyRef:
 #                 name: mongo-sec
