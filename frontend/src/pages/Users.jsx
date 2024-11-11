@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_URL = 'http://15.206.189.93:5000'; // Replace with your actual backend API URL
+const API_URL = 'http://localhost:5000'; // Replace with your actual backend API URL
 
 export const Users = () => {
   const [state, setState] = useState({
