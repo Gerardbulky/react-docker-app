@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: three-tier
   name: mongodb
 spec:
   serviceName: "mongodb"
