@@ -14,4 +14,4 @@ RUN npm install
 COPY . .
 
 # Start Nginx when the container launches
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "dev", "--host"]
