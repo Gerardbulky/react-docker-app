@@ -19,5 +19,5 @@ spec:           # Specifications about the object
         - name: react-frontend-app  # Name of the container
           image: bossmanjerry/react-frontend-app:v1  # Docker image to use for the container
           ports:
-            - containerPort: 80  # Port to expose on the containers
+            - containerPort: 5173  # Port to expose on the containers
           command: ["npm", "run", "dev", "--", "--host"]  # Command to run in the container
