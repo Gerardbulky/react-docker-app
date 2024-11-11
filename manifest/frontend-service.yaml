@@ -6,8 +6,8 @@ metadata:
 spec:
   type: NodePort  # Expose the Service on a port on each node
   ports:
-    - port: 80  # Port exposed externally by the Service
-      targetPort: 80  # Port on the pods to forward traffic to
+    - port: 5173  # Port exposed externally by the Service
+      targetPort: 5173  # Port on the pods to forward traffic to
       protocol: TCP
       # nodePort: 31515  # Port on each node to expose the Service
 
