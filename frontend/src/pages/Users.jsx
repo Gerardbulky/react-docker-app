@@ -36,37 +36,39 @@ export const Users = () => {
     }
   }, []);
 
-  // Create a new user
   const createUser = async () => {
     if (!state.name || !state.email || !state.password) {
       setMessage('Please fill out all fields');
       return;
     }
-
+  
     try {
       const userResponse = window.confirm('Are you sure you want to create this user?');
       if (!userResponse) return;
-
+  
       setLoading(true);
       const response = await fetch(`${API_URL}/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state),
       });
-
-      if (!response.ok) throw new Error('Failed to create user');
-
+  
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to create user: ${errorText}`);
+      }
+  
       const data = await response.json();
       setMessage(data.message || 'User created successfully');
-      fetchUsers(); // Refresh the list of users
-      setState({ name: '', email: '', password: '' }); // Reset form
+      fetchUsers(); // Refresh the user list
     } catch (error) {
-      setError('Error creating user');
-      console.error(error);
+      setMessage('Error creating user');
+      console.error('Fetch error:', error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Handle form submission
   const handleSubmit = (e) => {
