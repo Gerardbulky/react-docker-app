@@ -17,7 +17,7 @@ spec:           # Specifications about the object
     spec:         # Specifications for the pod
       containers:
         - name: react-frontend-app  # Name of the container
-          image: bossmanjerry/react-frontend-app:v4  # Docker image to use for the container
+          image: bossmanjerry/react-frontend-app:latest  # Docker image to use for the container
           ports:
             - containerPort: 5173  # Port to expose on the containers
           command: ["npm", "run", "dev", "--", "--host"]  # Command to run in the container
