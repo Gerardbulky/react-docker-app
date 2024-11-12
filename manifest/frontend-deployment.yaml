@@ -20,4 +20,4 @@ spec:           # Specifications about the object
           image: bossmanjerry/react-frontend-app:v1  # Docker image to use for the container
           ports:
             - containerPort: 5173  # Port to expose on the containers
-          command: ["npm", "run", "dev", "--", "--host", ""0.0.0.0""]  # Command to run in the container
+          command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
