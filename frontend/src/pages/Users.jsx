@@ -55,7 +55,8 @@ export const Users = () => {
   
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`Failed to create user: ${errorText}`);
+        console.error('Error details:', errorText);
+        throw new Error(`Failed to create user: ${response.statusText}`);
       }
   
       const data = await response.json();
@@ -68,6 +69,7 @@ export const Users = () => {
       setLoading(false);
     }
   };
+  
   
 
   // Handle form submission

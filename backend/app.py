@@ -13,26 +13,32 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
 mongo = PyMongo(app)
 
 @app.route('/user', methods=['POST'])
 def create_user():
-    data = request.get_json()
-    name = data.get('name')
-    email = data.get('email')
-    password = data.get('password')
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'message': 'Invalid data'}), 400
+        
+        name = data.get('name')
+        email = data.get('email')
+        password = data.get('password')
 
-    if not name or not email or not password:
-        return jsonify({'message': 'Missing data'}), 400
+        if not name or not email or not password:
+            return jsonify({'message': 'Missing data'}), 400
 
-    user_id = mongo.db.users.insert_one({
-        'name': name,
-        'email': email,
-        'password': password
-    }).inserted_id
+        user_id = mongo.db.users.insert_one({
+            'name': name,
+            'email': email,
+            'password': password
+        }).inserted_id
 
-    return jsonify({'message': 'User created successfully', 'id': str(user_id)}), 201
+        return jsonify({'message': 'User created successfully', 'id': str(user_id)}), 201
+    except Exception as e:
+        return jsonify({'message': 'Error creating user', 'error': str(e)}), 500
 
 @app.route('/users', methods=['GET'])
 def get_users():
