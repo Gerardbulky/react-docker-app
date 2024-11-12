@@ -8,6 +8,6 @@ spec:
       port: 5000            # Port exposed externally by the Service
       targetPort: 5000     # Port on the pods to forward traffic to
        
-  # selector:
-  #   component: back       # Select pods with the label "component: back" to target
-  # type: ClusterIP      # Expose the Service on a port on each node
+  selector:
+    component: back       # Select pods with the label "component: back" to target
+  type: ClusterIP      # Expose the Service on a port on each node

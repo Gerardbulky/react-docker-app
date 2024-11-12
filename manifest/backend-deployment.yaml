@@ -17,7 +17,7 @@ spec:
     spec:  
       containers:  
         - name: flask-backend-app  
-          image: bossmanjerry/flask-backend-app:v6
+          image: bossmanjerry/flask-backend-app:v7
           ports:  
             - containerPort: 5000
 
