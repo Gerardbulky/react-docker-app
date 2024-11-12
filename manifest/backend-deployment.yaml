@@ -17,7 +17,7 @@ spec:
     spec:  
       containers:  
         - name: flask-backend-app  
-          image: bossmanjerry/flask-backend-app:v7
+          image: bossmanjerry/flask-backend-app:latest
           ports:  
             - containerPort: 5000
 
@@ -25,15 +25,10 @@ spec:
             - name: MONGO_URI
               valueFrom:
                 secretKeyRef:
-                  name: mongo-sec
+                  name: mongo-secrets
                   key: MONGO_URI
-            - name: DB_USERNAME
+            - name: MONGO_DBNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo-sec
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-sec
-                  key: password
+                  name: mongo-secrets
+                  key: MONGO_DBNAME
