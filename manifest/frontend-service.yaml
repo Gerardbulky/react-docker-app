@@ -8,8 +8,8 @@ spec:
   ports:
     - port: 5173  # Port exposed externally by the Service
       targetPort: 5173  # Port on the pods to forward traffic to
+      nodePort: 31515  # Port on each node to expose the Service
       protocol: TCP
-      # nodePort: 31515  # Port on each node to expose the Service
 
   selector:
     component: front  # Select pods with the label "component: front" to target

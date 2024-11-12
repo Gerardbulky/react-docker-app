@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_URL = 'http://backend-deployment:5000'; // Replace with your actual backend API URL
+const API_URL = 'http://backend-service:5000'; // Replace with your actual backend API URL
 
 export const Users = () => {
   const [state, setState] = useState({
