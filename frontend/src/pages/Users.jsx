@@ -1,83 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-const API_URL = 'http://backend-service:5000'; // Replace with your actual backend API URL
+const API_URL = 'http://backend-service:5000';
 
 export const Users = () => {
-  const [state, setState] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [state, setState] = useState({ name: '', email: '', password: '' });
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setState((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const createUser = async () => {
-    try {
-      const userResponse = window.confirm('Are you sure you want to create this user?');
-      if (!userResponse) return;
-
-      const response = await fetch(`${API_URL}/user`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: state.name,
-          email: state.email,
-          password: state.password,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      setMessage(data.message || 'User created successfully');
-      fetchUsers(); // Refresh the list of users after creating a new user
-    } catch (error) {
-      console.error('There was an error creating the user!', error);
-      setMessage('Error creating user');
-    }
-  };
-
-  const fetchUsers = async () => {
+  // Fetch users from the backend
+  const fetchUsers = useCallback(async () => {
+    setLoading(true);
+    setError('');
     try {
       const response = await fetch(`${API_URL}/users`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      if (!response.ok) throw new Error('Failed to fetch users');
 
       const data = await response.json();
       setUsers(data.users || []);
     } catch (error) {
-      console.error('There was an error fetching the users!', error);
-      setMessage('Error fetching users');
+      setError('Error fetching users');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Create a new user
+  const createUser = async () => {
+    if (!state.name || !state.email || !state.password) {
+      setMessage('Please fill out all fields');
+      return;
+    }
+
+    try {
+      const userResponse = window.confirm('Are you sure you want to create this user?');
+      if (!userResponse) return;
+
+      setLoading(true);
+      const response = await fetch(`${API_URL}/user`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state),
+      });
+
+      if (!response.ok) throw new Error('Failed to create user');
+
+      const data = await response.json();
+      setMessage(data.message || 'User created successfully');
+      fetchUsers(); // Refresh the list of users
+      setState({ name: '', email: '', password: '' }); // Reset form
+    } catch (error) {
+      setError('Error creating user');
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     createUser();
   };
+
+  // Fetch users on component mount
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   return (
     <div style={styles.container}>
@@ -106,18 +106,30 @@ export const Users = () => {
           onChange={handleChange}
           style={styles.input}
         />
-        <button type="submit" style={styles.button}>Create User</button>
+        <button type="submit" style={styles.button} disabled={loading}>
+          {loading ? 'Creating...' : 'Create User'}
+        </button>
       </form>
+
       {message && <p style={styles.message}>{message}</p>}
+      {error && <p style={styles.error}>{error}</p>}
+
       <h2 style={styles.heading}>Users List</h2>
-      <ul style={styles.userList}>
-        {users.map((user) => (
-          <li key={user.id} style={styles.userItem}>{user.name} - {user.email}</li>
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading users...</p>
+      ) : (
+        <ul style={styles.userList}>
+          {users.map((user) => (
+            <li key={user.id} style={styles.userItem}>
+              {user.name} - {user.email}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
+
 
 const styles = {
   container: {
