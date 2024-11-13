@@ -7,7 +7,7 @@ spec:
   ports:
     - port: 5173
       targetPort: 5173
-      nodePort: 31515  # Port on each node to expose the Service
+      nodePort: 30003  # Port on each node to expose the Service
       protocol: TCP
   type: NodePort
   selector:
