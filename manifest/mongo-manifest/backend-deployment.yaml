@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: api  
-        image: bossmanjerry/flask-backend-app:v6
+        image: bossmanjerry/flask-backend-app:latest
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
