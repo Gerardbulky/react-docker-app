@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const API_URL = 'http://backend-service:5000';
+const API_URL = 'http://api:5000';
 
 export const Users = () => {
   const [state, setState] = useState({ name: '', email: '', password: '' });
