@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc  # Name of the Service object
+
+spec:
+  type: NodePort  # Expose the Service on a port on each node
+  ports:
+    - port: 5173  # Port exposed externally by the Service
+      targetPort: 5173  # Port on the pods to forward traffic to
+      nodePort: 31515  # Port on each node to expose the Service
+      protocol: TCP
+
+  selector:
+    component: front  # Select pods with the label "component: front" to target

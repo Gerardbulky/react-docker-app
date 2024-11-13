@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-end-deployment  # Deployment object name
+
+spec:           # Specifications about the object
+  replicas: 1  # Number of desired replicas (pods)
+  selector:
+    matchLabels:
+      component: front  # Selector to match labels for pods controlled by this Deployment 
+  
+  template: # Template for creating pods
+    metadata:
+      labels:
+        component: front  # Labels applied to pods created by this Deployment
+    
+    spec:         # Specifications for the pod
+      containers:
+        - name: react-frontend-app  # Name of the container
+          image: bossmanjerry/react-frontend-app:latest  # Docker image to use for the container
+          ports:
+            - containerPort: 5173  # Port to expose on the containers
+          command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
