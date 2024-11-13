@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://api.three-tier.svc.cluster.local:5000';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 export const Users = () => {
   const [state, setState] = useState({ name: '', email: '', password: '' });
