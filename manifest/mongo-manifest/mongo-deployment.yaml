@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mon
-        image: mongo:4.4.6
+        image: mongo:latest
         command:
           - "numactl"
           - "--interleave=all"
@@ -31,12 +31,12 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: mongo-sec
+                name: mongo-cred
                 key: username
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mongo-sec
+                name: mongo-cred
                 key: password
         volumeMounts:
         - name: mongo-volume

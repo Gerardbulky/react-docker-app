@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: api  
-        image: bossmanjerry/flask-backend-app:latest
+        image: bossmanjerry/flask-backend-app:v10
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
@@ -31,12 +31,12 @@ spec:
           - name: MONGO_USERNAME
             valueFrom:
               secretKeyRef:
-                name: mongo-sec
+                name: mongo-cred
                 key: username
           - name: MONGO_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mongo-sec
+                name: mongo-cred
                 key: password
         ports:
         - containerPort: 5000
