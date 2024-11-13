@@ -23,9 +23,9 @@ spec:
         role: frontend
     spec: 
       containers:
-        - name: frontend
-          image: bossmanjerry/react-frontend-app:v2
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 5173
-          command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
+      - name: frontend
+        image: bossmanjerry/react-frontend-app:v3
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5173
+        command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container

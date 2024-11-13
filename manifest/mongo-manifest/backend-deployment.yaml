@@ -22,8 +22,8 @@ spec:
         role: api
     spec:
       containers:
-        - name: flask-backend-app  
-          image: bossmanjerry/flask-backend-app:v2
+      - name: api  
+        image: bossmanjerry/flask-backend-app:v3
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
@@ -39,7 +39,7 @@ spec:
                 name: mongo-sec
                 key: password
         ports:
-          - containerPort: 5000
+        - containerPort: 5000
         livenessProbe: 
           httpGet:
             path: /ok
