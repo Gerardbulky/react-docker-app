@@ -24,7 +24,7 @@ spec:
     spec: 
       containers:
       - name: frontend
-        image: bossmanjerry/react-frontend-app:v3
+        image: bossmanjerry/react-frontend-app:v5
         imagePullPolicy: Always
         ports:
         - containerPort: 5173
