@@ -1,0 +1,31 @@
+# -----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: three-tier
+  labels:
+    role: frontend
+    env: demo
+spec: 
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels: 
+      role: frontend
+  template:
+    metadata:
+      labels:
+        role: frontend
+    spec: 
+      containers:
+        - name: frontend
+          image: bossmanjerry/react-frontend-app:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5173
+          command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
