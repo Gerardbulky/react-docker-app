@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mon
-        image: mongo:latest
+        image: mongo:4.4.6
         command:
           - "numactl"
           - "--interleave=all"
