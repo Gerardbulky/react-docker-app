@@ -7,10 +7,24 @@ from flask_cors import CORS
 if os.path.exists("env.py"):
     import env as env
 
-
 app = Flask(__name__)
-# app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_CONN_STR")
+
+
+# Get environment variables
+mongo_conn_str = os.environ.get("MONGO_CONN_STR")  # Should be something like mongodb://mongodb-svc:27017/source?directConnection=true
+mongo_username = os.environ.get("MONGO_USERNAME")
+mongo_password = os.environ.get("MONGO_PASSWORD")
+
+# Check if running in a Kubernetes environment with authentication
+if mongo_conn_str and mongo_username and mongo_password:
+    # Use the service name for internal DNS resolution in Kubernetes
+    mongo_uri = f"mongodb://{mongo_username}:{mongo_password}@{mongo_conn_str.split('//')[1]}"
+else:
+    # Fallback for local development using a single MONGO_URI
+    mongo_uri = os.environ.get("MONGO_URI")
+
+# Set the MongoDB URI in the Flask config
+app.config["MONGO_URI"] = mongo_uri
 app.secret_key = os.environ.get("SECRET_KEY")
 
 CORS(app, resources={r"/*": {"origins": "*"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
