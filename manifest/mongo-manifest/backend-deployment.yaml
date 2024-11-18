@@ -23,14 +23,11 @@ spec:
     spec:
       containers:
       - name: api  
-        image: bossmanjerry/flask-backend-app:v17
+        image: bossmanjerry/flask-backend-app:latest
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
-            valueFrom:
-              secretKeyRef:
-                name: mongo-cred
-                key: MONGO_CONN_STR
+            value: mongodb://mongodb-svc:27017/course?directConnection=true
           - name: MONGO_USERNAME
             valueFrom:
               secretKeyRef:
