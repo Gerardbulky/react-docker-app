@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 # Get environment variables
-mongo_conn_str = os.environ.get("MONGO_CONN_STR")  # Should be something like mongodb://mongodb-svc:27017/source?directConnection=true
+mongo_conn_str = os.environ.get("MONGO_URI")  # Should be something like mongodb://mongodb-svc:27017/source?directConnection=true
 mongo_username = os.environ.get("MONGO_USERNAME")
 mongo_password = os.environ.get("MONGO_PASSWORD")
 
