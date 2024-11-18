@@ -27,7 +27,10 @@ spec:
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
-            value: bW9uZ29kYitzcnY6Ly9yb290MTk4OTpCb3NzTWFuQG15Zmlyc3RjbHVzdGVyLmRnb3llLm1vbmdvZGIubmV0L2NvdXJzZT9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHk=
+            valueFrom:
+              secretKeyRef:
+                name: mongo-cred
+                key: MONGO_CONN_STR
           - name: MONGO_USERNAME
             valueFrom:
               secretKeyRef:
