@@ -23,11 +23,9 @@ spec:
     spec:
       containers:
       - name: api  
-        image: bossmanjerry/flask-backend-app:v22
+        image: bossmanjerry/flask-backend-app:v23
         imagePullPolicy: Always
         env:
-          - name: MONGO_CONN_STR
-            value: mongodb://mongodb-svc:27017/course?directConnection=true
           - name: MONGO_USERNAME
             valueFrom:
               secretKeyRef:
@@ -38,6 +36,13 @@ spec:
               secretKeyRef:
                 name: mongo-cred
                 key: password
+          - name: MONGO_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mongo-cred
+                key: database
+          - name: MONGO_URI
+            value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb-svc:27017/$(MONGO_DATABASE)?authSource=$(MONGO_DATABASE)"
         ports:
         - containerPort: 5000
         livenessProbe: 
