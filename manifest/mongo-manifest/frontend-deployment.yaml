@@ -24,10 +24,10 @@ spec:
     spec: 
       containers:
       - name: frontend
-        image: bossmanjerry/react-frontend-app:v14
+        image: bossmanjerry/react-frontend-app:v15
         imagePullPolicy: Always
         env:
-          - name: REACT_APP_API_URL
+          - name: VITE_API_URL
             value: http://api.three-tier.svc.cluster.local:5000
         ports:
         - containerPort: 5173
