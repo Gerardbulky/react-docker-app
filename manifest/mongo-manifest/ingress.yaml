@@ -18,6 +18,13 @@ spec:
             name: api
             port:
               number: 5000
+      - path: /users
+        pathType: Prefix
+        backend:
+          service:
+            name: api
+            port:
+              number: 5000
       # Route root requests to the frontend
       - path: /
         pathType: Prefix
