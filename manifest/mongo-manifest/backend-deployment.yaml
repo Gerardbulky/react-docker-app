@@ -5,7 +5,6 @@ metadata:
   namespace: three-tier
   labels: 
     role: api
-    env: demo
 spec: 
   replicas: 1
   strategy: 
@@ -23,7 +22,7 @@ spec:
     spec:
       containers:
       - name: api  
-        image: bossmanjerry/flask-backend-app:v3
+        image: bossmanjerry/flask-backend-app:v4
         imagePullPolicy: Always
         env:
           - name: MONGO_USERNAME
