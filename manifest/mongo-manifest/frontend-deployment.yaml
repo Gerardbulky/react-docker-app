@@ -24,7 +24,7 @@ spec:
     spec: 
       containers:
       - name: frontend
-        image: bossmanjerry/react-frontend-app:v1
+        image: bossmanjerry/react-frontend-app:v2
         imagePullPolicy: Always
         env:
           - name: VITE_API_URL
