@@ -6,18 +6,16 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.example.com
+    secretName: tls-secret
   rules:
   - host: api.example.com
     http:
       paths:
       # Route /user requests to the backend
-      - path: /user
-        pathType: Prefix
-        backend:
-          service:
-            name: api
-            port:
-              number: 5000
       - path: /users
         pathType: Prefix
         backend:

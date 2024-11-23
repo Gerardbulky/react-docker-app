@@ -46,15 +46,19 @@ def create_user():
 
 @app.route('/users', methods=['GET'])
 def get_users():
-    users = mongo.db.users.find()
-    user_list = []
-    for user in users:
-        user_list.append({
-            'id': str(user['_id']),
-            'name': user['name'],
-            'email': user['email']
-        })
-    return jsonify({'users': user_list}), 200
+    try:
+        users = mongo.db.users.find()
+        user_list = []
+        for user in users:
+            user_list.append({
+                'id': str(user['_id']),
+                'name': user['name'],
+                'email': user['email']
+            })
+        return jsonify({'users': user_list}), 200
+    except Exception as e:
+        print("Error fetching users:", e)
+        return jsonify({'message': 'Error fetching users', 'error': str(e)}), 500
 
 
 @app.route('/ok', methods=['GET'])
