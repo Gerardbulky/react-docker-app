@@ -3,10 +3,24 @@ kind: Service
 metadata:
   name: api
   namespace: three-tier
-spec: 
+spec:
+  type: NodePort
   ports:
   - port: 5000
-    protocol: TCP
-  type: ClusterIP
+    targetPort: 5000
   selector:
     role: api
+
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: api
+#   namespace: three-tier
+# spec: 
+#   ports:
+#   - port: 5000
+#     protocol: TCP
+#   type: ClusterIP
+#   selector:
+#     role: api
