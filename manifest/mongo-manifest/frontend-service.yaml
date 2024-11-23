@@ -5,9 +5,9 @@ metadata:
   namespace: three-tier
 spec:
   ports:
-    - port: 80
+    - port: 80  # Expose the service on port 80
       targetPort: 5173  # Map the service's port 80 to the container's 5173
       protocol: TCP
-  type: ClusterIP
+  type: NodePort
   selector:
     role: frontend
