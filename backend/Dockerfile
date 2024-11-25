@@ -12,6 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade pymongo
 RUN pip install flask-pymongo
 RUN apt update && apt install -y net-tools
+RUN pip install flask-cors
 
 # Copy the rest of the application code into the container
 COPY . .
