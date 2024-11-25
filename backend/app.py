@@ -18,9 +18,11 @@ app.config["MONGO_URI"] = mongo_uri
 app.secret_key = os.environ.get("SECRET_KEY")
 
 # CORS(app, resources={r"/*": {"origins": "http://52.66.249.115:30005"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
-CORS(app, origins=["http://52.66.249.115:30005"])  # Allow frontend URL
+CORS(app, origins=["http://52.66.249.115:30088"], methods=["GET", "POST"], supports_credentials=True)
+
 
 mongo = PyMongo(app)
+
 
 @app.route('/user', methods=['POST'])
 def create_user():

@@ -24,11 +24,11 @@ spec:
     spec: 
       containers:
       - name: frontend
-        image: bossmanjerry/react-frontend-app:v15
+        image: bossmanjerry/react-frontend-app:v16
         imagePullPolicy: Always
         env:
           - name: VITE_API_URL
-            value: "http://52.66.249.115:5000"
+            value: "http://52.66.249.115:30055"
         ports:
         - containerPort: 5173
         command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
