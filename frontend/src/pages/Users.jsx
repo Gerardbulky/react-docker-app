@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 // const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = "http://api.three-tier.svc.cluster.local:5000";
+const API_URL = "http://52.66.249.115:5000";
 
 console.log('API URL:', API_URL); 
 
