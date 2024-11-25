@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 // const API_URL = import.meta.env.VITE_API_URL;
-const API_URL = "http://52.66.249.115:30005";
+const API_URL = "http://app.example";
 
 console.log('API URL:', API_URL); 
 
