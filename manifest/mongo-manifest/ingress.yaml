@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
 spec:
   rules:
-  - host: 52.66.249.115
+  - host: http://52.66.249.115
     http:
       paths:
       - path: /users
