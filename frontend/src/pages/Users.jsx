@@ -64,6 +64,7 @@ export const Users = () => {
   
       const data = await response.json();
       setMessage(data.message || 'User created successfully');
+      console.success('Fetch success:', success);
       fetchUsers(); // Refresh the user list
     } catch (error) {
       setMessage('Error creating user');
@@ -120,6 +121,7 @@ export const Users = () => {
 
       {message && <p style={styles.message}>{message}</p>}
       {error && <p style={styles.error}>{error}</p>}
+      {successsuccess && <p style={styles.successsuccess}>{successsuccess}</p>}
 
       <h2 style={styles.heading}>Users List</h2>
       {loading ? (
