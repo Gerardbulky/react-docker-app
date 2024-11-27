@@ -17,8 +17,8 @@ mongo_uri = os.environ.get("MONGO_URI")
 app.config["MONGO_URI"] = mongo_uri
 app.secret_key = os.environ.get("SECRET_KEY")
 
-# CORS(app, resources={r"/*": {"origins": "http://52.66.249.115:30005"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
-CORS(app, origins=["http://app.example"], methods=["GET", "POST"], supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "http://13.233.91.237:30000"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
+# CORS(app, origins=["http://app.example"], methods=["GET", "POST"], supports_credentials=True)
 
 mongo = PyMongo(app)
 

@@ -7,6 +7,7 @@ spec:
   ports:
     - port: 80  # Expose the service on port 80
       targetPort: 5173  # Map the service's port 80 to the container's 5173
-  type: ClusterIP  # Make the service accessible from within the cluster
+      nodePort: 30000  # Expose the service on port 30000
+  type: NodePort  
   selector:
     role: frontend
