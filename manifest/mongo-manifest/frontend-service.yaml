@@ -7,7 +7,7 @@ spec:
   ports:
     - port: 5173  # Expose the service on port 80
       targetPort: 5173  # Map the service's port 80 to the container's 5173
-      nodePort: 30001  # Expose the service on port 30000
+      nodePort: 30002  # Expose the service on port 30000
   type: NodePort  
   selector:
     role: frontend
