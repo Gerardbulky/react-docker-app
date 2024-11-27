@@ -9,7 +9,6 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 
-
 # Use the full MONGO_URI from the environment variable
 mongo_uri = os.environ.get("MONGO_URI")
 
@@ -17,8 +16,7 @@ mongo_uri = os.environ.get("MONGO_URI")
 app.config["MONGO_URI"] = mongo_uri
 app.secret_key = os.environ.get("SECRET_KEY")
 
-CORS(app, resources={r"/*": {"origins": "http://13.233.91.237:30002"}}, methods=["GET", "POST"], supports_credentials=True, allow_headers=["Content-Type"])
-# CORS(app, origins=["http://app.example"], methods=["GET", "POST"], supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "http://13.233.91.237:30002"}}, methods=["GET", "POST", "DELETE"], supports_credentials=True, allow_headers=["Content-Type"])
 
 mongo = PyMongo(app)
 
@@ -47,6 +45,7 @@ def create_user():
     except Exception as e:
         return jsonify({'message': 'Error creating user', 'error': str(e)}), 500
 
+
 @app.route('/users', methods=['GET'])
 def get_users():
     try:
@@ -64,10 +63,26 @@ def get_users():
         return jsonify({'message': 'Error fetching users', 'error': str(e)}), 500
 
 
+@app.route('/user/<id>', methods=['DELETE'])
+def delete_user(id):
+    try:
+        if not ObjectId.is_valid(id):
+            return jsonify({'message': 'Invalid user ID'}), 400
+
+        result = mongo.db.users.delete_one({'_id': ObjectId(id)})
+
+        if result.deleted_count == 0:
+            return jsonify({'message': 'User not found'}), 404
+
+        return jsonify({'message': 'User deleted successfully'}), 200
+    except Exception as e:
+        print("Error deleting user:", e)
+        return jsonify({'message': 'Error deleting user', 'error': str(e)}), 500
+
+
 @app.route('/ok', methods=['GET'])
 def health_check():
     return "OK", 200
-
 
 if __name__ == '__main__':
     app.run(debug=False, host="0.0.0.0", port=5000)
