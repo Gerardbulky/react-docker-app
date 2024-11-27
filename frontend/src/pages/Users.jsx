@@ -119,9 +119,8 @@ export const Users = () => {
         </button>
       </form>
 
-      {message && <p style={styles.message}>{message}</p>}
+      {message && <p style={message === 'User created successfully' ? { ...styles.message, color: 'green' } : styles.message}>{message}</p>}
       {error && <p style={styles.error}>{error}</p>}
-      {successsuccess && <p style={styles.successsuccess}>{successsuccess}</p>}
 
       <h2 style={styles.heading}>Users List</h2>
       {loading ? (
