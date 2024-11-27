@@ -28,7 +28,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: VITE_API_URL
-            value: "http://13.233.91.237"
+            value: "http://13.233.91.237:30005"
         ports:
         - containerPort: 5173
         command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]  # Command to run in the container
