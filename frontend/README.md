@@ -2,7 +2,7 @@
 
 
 
-## Some chanllenges I encountered and how I resolved them
+## Some chanllenges I encountered and how I resolved them.
 
 ### React App
 
